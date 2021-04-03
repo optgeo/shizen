@@ -1,0 +1,220 @@
+{
+  "MAXZOOM": 13,
+  "MINZOOM": 11,
+  "SITE_ROOT": "https://optgeo.github.io/shizen",
+  "URL": "https://cyberjapandata.gsi.go.jp/xyz/experimental_nnfpt",
+  "center": [
+    139.74659,
+    35.63518
+  ],
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "sky",
+      "paint": {
+        "sky-type": "atmosphere"
+      },
+      "type": "sky"
+    },
+    {
+      "id": "background",
+      "paint": {
+        "background-color": [
+          "rgb",
+          194,
+          209,
+          251
+        ]
+      },
+      "type": "background"
+    },
+    {
+      "id": "slopemap",
+      "maxzoom": 18,
+      "minzoom": 3,
+      "source": "slopemap",
+      "type": "raster"
+    },
+    {
+      "id": "NNFPt",
+      "layout": {
+        "text-field": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "get",
+            "name"
+          ],
+          14,
+          [
+            "concat",
+            [
+              "get",
+              "name"
+            ],
+            "（",
+            [
+              "get",
+              "type"
+            ],
+            "）"
+          ],
+          15,
+          [
+            "concat",
+            [
+              "get",
+              "name"
+            ],
+            "（",
+            [
+              "get",
+              "kana"
+            ],
+            "：",
+            [
+              "get",
+              "type"
+            ],
+            "）"
+          ],
+          16,
+          [
+            "concat",
+            [
+              "get",
+              "name"
+            ],
+            "（",
+            [
+              "get",
+              "kana"
+            ],
+            "／",
+            [
+              "get",
+              "rj"
+            ],
+            "：",
+            [
+              "get",
+              "type"
+            ],
+            "）"
+          ]
+        ],
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          11,
+          7,
+          14,
+          20
+        ]
+      },
+      "paint": {
+        "text-color": [
+          "match",
+          [
+            "get",
+            "type"
+          ],
+          [
+            "河川",
+            "湖沼",
+            "滝",
+            "海岸・浜・磯",
+            "湾・灘",
+            "海峡・水道"
+          ],
+          [
+            "rgb",
+            45,
+            91,
+            246
+          ],
+          [
+            "山"
+          ],
+          [
+            "rgb",
+            146,
+            114,
+            39
+          ],
+          [
+            "rgb",
+            0,
+            0,
+            0
+          ]
+        ],
+        "text-halo-color": [
+          "match",
+          [
+            "get",
+            "gaijiFlg"
+          ],
+          1,
+          [
+            "rgb",
+            255,
+            255,
+            0
+          ],
+          [
+            "rgb",
+            255,
+            255,
+            255
+          ]
+        ],
+        "text-halo-width": 2
+      },
+      "source": "v",
+      "source-layer": "NNFPt",
+      "type": "symbol"
+    }
+  ],
+  "sources": {
+    "h": {
+      "maxzoom": 12,
+      "minzoom": 3,
+      "tileSize": 256,
+      "tiles": [
+        "https://optgeo.github.io/10b256/zxy/{z}/{x}/{y}.webp"
+      ],
+      "type": "raster-dem"
+    },
+    "slopemap": {
+      "attribution": "地理院タイル",
+      "maxzoom": 15,
+      "minzoom": 3,
+      "tileSize": 256,
+      "tiles": [
+        "https://maps.gsi.go.jp/xyz/slopemap/{z}/{x}/{y}.png"
+      ],
+      "type": "raster"
+    },
+    "v": {
+      "maxzoom": 13,
+      "minzoom": 11,
+      "tiles": [
+        "https://optgeo.github.io/shizen/zxy/{z}/{x}/{y}.pbf"
+      ],
+      "type": "vector"
+    }
+  },
+  "terrain": {
+    "source": "h"
+  },
+  "version": 8,
+  "zoom": 11
+}
